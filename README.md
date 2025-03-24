@@ -93,15 +93,15 @@ The metadata file (`metadata.json`) provides context for interpreting the data a
 	],
 	"relationships": [
 		{
-		"type": "one-to-one",
-		"sourceColumn": "UserProfileID",
-		"linkedFile": "linked/profiles.tsv",
-		"linkedColumn": "ProfileID",
-		"linkedCells": [
-			{"sourceRow": 1, "linkedRow": 3},
-			{"sourceRow": 2, "linkedRow": 7},
-			{"sourceRow": 3, "linkedRow": 12}
-		]
+			"type": "one-to-one",
+			"sourceColumn": "UserProfileID",
+			"linkedFile": "linked/profiles.tsv",
+			"linkedColumn": "ProfileID",
+			"linkedCells": [
+				{"sourceRow": 1, "linkedRow": 3},
+				{"sourceRow": 2, "linkedRow": 7},
+				{"sourceRow": 3, "linkedRow": 12}
+			]
 		}
 	]
 }
