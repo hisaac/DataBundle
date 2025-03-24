@@ -2,34 +2,34 @@
 
 ## Introduction
 
-DataBundle is an open, lightweight, and portable data interchange format designed for ease of sharing, collaborative editing, and long-term archival. Inspired by the TextBundle specification, DataBundle primarily stores structured data in CSV format, supplemented by JSON metadata and optional assets.
+DataBundle is an open, lightweight, and portable data interchange format designed for ease of sharing, collaborative editing, and long-term archival. Inspired by the TextBundle specification, DataBundle primarily stores structured data in TSV format, supplemented by JSON metadata and optional assets.
 
 ## Structure of a DataBundle
 
 A DataBundle file is a directory package (`.databundle`) containing:
 
-- **data.csv** *(required)*: The primary structured data file.
+- **data.tsv** *(required)*: The primary structured data file.
 - **metadata.json** *(required)*: Describes the schema, data types, formatting rules, relationships, sorting/filtering rules, and formulas.
-- **assets/** *(optional)*: A directory containing files (images, documents, etc.) referenced by relative URLs within the CSV.
-- **linked/** *(optional)*: Additional CSV files that provide relational or linked data.
+- **assets/** *(optional)*: A directory containing files (images, documents, etc.) referenced by relative URLs within the TSV.
+- **linked/** *(optional)*: Additional TSV files that provide relational or linked data.
 
 ### Example Structure
 
 ```text
 example.databundle/
-├── data.csv
+├── data.tsv
 ├── metadata.json
 ├── assets/
 │   ├── image1.png
 │   └── document1.pdf
 └── linked/
-    ├── supplementary.csv
-    └── lookup.csv
+    ├── supplementary.tsv
+    └── lookup.tsv
 ```
 
-## Data CSV Format
+## Data TSV Format
 
-- Standard CSV format adhering to [RFC 4180](https://tools.ietf.org/html/rfc4180).
+- Standard TSV format adhering to [IANA's TSV Media Type](https://www.iana.org/assignments/media-types/text/tab-separated-values).
 - UTF-8 encoding without BOM.
 - Asset references use relative URLs, e.g., `assets/image1.png`.
 
@@ -39,8 +39,8 @@ The metadata file (`metadata.json`) provides context for interpreting the data a
 
 ### Required Properties
 
-- **columns** *(array of objects)*: Describes each CSV column:
-	- `name`: Column name matching CSV header.
+- **columns** *(array of objects)*: Describes each TSV column:
+	- `name`: Column name matching TSV header.
 	- `type`: Data type (`string`, `number`, `date`, `boolean`, `file`, etc.).
 	- `format` *(optional)*: Display format information (e.g., date format, currency).
 
@@ -62,12 +62,12 @@ The metadata file (`metadata.json`) provides context for interpreting the data a
 	- `criteria`: Filter criteria.
 - **relationships** *(array of objects)*:
 	- `type` *(optional)*: Specifies relationship type (`one-to-one`, `one-to-many`). Defaults to `one-to-many` if unspecified.
-	- `sourceColumn`: Column in the primary CSV.
-	- `linkedFile`: Path to CSV file in `linked/`.
-	- `linkedColumn`: Corresponding column in the linked CSV.
+	- `sourceColumn`: Column in the primary TSV.
+	- `linkedFile`: Path to TSV file in `linked/`.
+	- `linkedColumn`: Corresponding column in the linked TSV.
 	- `linkedCells` *(optional)*: Explicit cell-level mappings for one-to-one relationships:
-		- `sourceRow`: Row number in primary CSV.
-		- `linkedRow`: Row number in linked CSV.
+		- `sourceRow`: Row number in primary TSV.
+		- `linkedRow`: Row number in linked TSV.
 
 ### Example Metadata
 
@@ -95,7 +95,7 @@ The metadata file (`metadata.json`) provides context for interpreting the data a
 		{
 		"type": "one-to-one",
 		"sourceColumn": "UserProfileID",
-		"linkedFile": "linked/profiles.csv",
+		"linkedFile": "linked/profiles.tsv",
 		"linkedColumn": "ProfileID",
 		"linkedCells": [
 			{"sourceRow": 1, "linkedRow": 3},
@@ -109,12 +109,12 @@ The metadata file (`metadata.json`) provides context for interpreting the data a
 
 ## Assets
 
-Assets referenced in the CSV file must reside in the `assets/` folder. Asset references must use relative paths.
+Assets referenced in the TSV file must reside in the `assets/` folder. Asset references must use relative paths.
 
 ## Linked Data
 
-- Linked data is stored in additional CSV files in the `linked/` directory.
-- Relationship metadata defines links between the primary CSV and linked CSVs.
+- Linked data is stored in additional TSV files in the `linked/` directory.
+- Relationship metadata defines links between the primary TSV and linked TSVs.
 
 ## Usage
 
