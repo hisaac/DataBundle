@@ -128,6 +128,10 @@ DataBundles facilitate data sharing and collaboration without proprietary format
 
 Future spec versions will maintain backward compatibility. The metadata file can specify a schema version if needed for future evolution.
 
+## Acknowledgements
+
+This specification takes inspiration from the [TextBundle](https://textbundle.org) specification by Brett Terpstra ([@ttscoff](https://github.com/ttscoff)).
+
 ---
 
 This specification is open for feedback and improvement.
